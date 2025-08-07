@@ -1,16 +1,6 @@
 [build]
-  command = "npm run build"
-  functions = "netlify/functions"
+  command = "npm install"
   publish = "public"
-
-[dev]
-  command = "npm start"
-  port = 3000
-
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
 
 [[headers]]
   for = "/*"
@@ -24,3 +14,8 @@
   for = "/manifest.json"
   [headers.values]
     Content-Type = "application/manifest+json"
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
