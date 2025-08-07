@@ -1,0 +1,37 @@
+{
+  "name": "community-connect",
+  "version": "1.0.0",
+  "description": "Community Internet Access Points Manager - Help communities coordinate shared internet access",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build": "echo 'Build complete'",
+    "test": "node test/test.js"
+  },
+  "keywords": [
+    "community",
+    "internet",
+    "access",
+    "rural",
+    "mesh",
+    "open-source",
+    "pwa"
+  ],
+  "author": "Community Contributors",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/community/community-connect"
+  },
+  "bugs": {
+    "url": "https://github.com/community/community-connect/issues"
+  },
+  "homepage": "https://github.com/community/community-connect#readme"
+}

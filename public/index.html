@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CommunityConnect - Internet Access Points</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <meta name="theme-color" content="#2196F3">
+</head>
+<body>
+    <header>
+        <h1>🌐 CommunityConnect</h1>
+        <p>Find & Share Internet Access in Your Community</p>
+        <div class="stats">
+            <span id="stats-points">0 Access Points</span>
+            <span id="stats-users">0 Active Users</span>
+            <span id="stats-bookings">0 Active Bookings</span>
+        </div>
+    </header>
+
+    <nav>
+        <button id="map-tab" class="tab active">📍 Map</button>
+        <button id="add-tab" class="tab">➕ Add Point</button>
+        <button id="book-tab" class="tab">📅 Book Access</button>
+        <button id="list-tab" class="tab">📋 My Bookings</button>
+    </nav>
+
+    <main>
+        <section id="map-section" class="section active">
+            <div id="map"></div>
+            <div class="map-controls">
+                <button id="refresh-map">🔄 Refresh</button>
+                <button id="locate-me">📍 My Location</button>
+            </div>
+        </section>
+
+        <section id="add-section" class="section">
+            <h2>Add Internet Access Point</h2>
+            <form id="add-form">
+                <input type="text" id="name" placeholder="Access Point Name" required>
+                <textarea id="description" placeholder="Description (optional)"></textarea>
+                <input type="email" id="contact" placeholder="Contact Email">
+                <input type="text" id="hours" placeholder="Available Hours (e.g., 9 AM - 6 PM)">
+                <input type="number" id="max-users" placeholder="Max Users" min="1" max="20" value="5">
+                <input type="text" id="speed" placeholder="Internet Speed (e.g., 50 Mbps)">
+                <div class="location-input">
+                    <input type="number" id="latitude" placeholder="Latitude" step="any" readonly>
+                    <input type="number" id="longitude" placeholder="Longitude" step="any" readonly>
+                    <button type="button" id="get-location">📍 Get My Location</button>
+                </div>
+                <button type="submit">Add Access Point</button>
+            </form>
+        </section>
+
+        <section id="book-section" class="section">
+            <h2>Book Internet Access</h2>
+            <form id="book-form">
+                <select id="access-point" required>
+                    <option value="">Select Access Point</option>
+                </select>
+                <input type="text" id="user-name" placeholder="Your Name" required>
+                <input type="tel" id="user-contact" placeholder="Your Phone/Email">
+                <input type="datetime-local" id="start-time" required>
+                <input type="datetime-local" id="end-time" required>
+                <textarea id="purpose" placeholder="Purpose (optional)"></textarea>
+                <button type="submit">Book Access</button>
+            </form>
+        </section>
+
+        <section id="list-section" class="section">
+            <h2>Active Bookings</h2>
+            <div id="bookings-list">
+                <p class="loading">Loading bookings...</p>
+            </div>
+        </section>
+    </main>
+
+    <div id="notification" class="notification hidden"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
