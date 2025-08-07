@@ -97,27 +97,65 @@ class CommunityConnect {
 
     async loadAccessPoints() {
         try {
+            if (window.DEMO_DATA) {
+                this.accessPoints = window.DEMO_DATA.accessPoints;
+                this.updateMap();
+                this.updateAccessPointSelect();
+                return;
+            }
             const response = await fetch('/api/access-points');
             this.accessPoints = await response.json();
             this.updateMap();
             this.updateAccessPointSelect();
         } catch (error) {
-            this.showNotification('Failed to load access points', 'error');
+            if (window.DEMO_DATA) {
+                this.accessPoints = window.DEMO_DATA.accessPoints;
+                this.updateMap();
+                this.updateAccessPointSelect();
+            } else {
+                this.showNotification('Failed to load access points', 'error');
+            }
         }
     }
 
     async loadBookings() {
         try {
+            if (window.DEMO_DATA) {
+                this.bookings = window.DEMO_DATA.bookings;
+                this.updateBookingsList();
+                return;
+            }
             const response = await fetch('/api/bookings');
             this.bookings = await response.json();
             this.updateBookingsList();
         } catch (error) {
-            this.showNotification('Failed to load bookings', 'error');
+            if (window.DEMO_DATA) {
+                this.bookings = window.DEMO_DATA.bookings;
+                this.updateBookingsList();
+            } else {
+                this.showNotification('Failed to load bookings', 'error');
+            }
         }
     }
 
     async loadStats() {
         try {
+            if (window.DEMO_DATA) {
+                const stats = {
+                    total_access_points: this.accessPoints.length,
+                    current_total_users: this.accessPoints.reduce((sum, point) => sum + point.current_users, 0),
+                    active_bookings: this.bookings.length
+                };
+                
+                document.getElementById('stats-points').textContent = 
+                    `${stats.total_access_points} Access Points`;
+                document.getElementById('stats-users').textContent = 
+                    `${stats.current_total_users} Active Users`;
+                document.getElementById('stats-bookings').textContent = 
+                    `${stats.active_bookings} Active Bookings`;
+                return;
+            }
+            
             const response = await fetch('/api/stats');
             const stats = await response.json();
             
